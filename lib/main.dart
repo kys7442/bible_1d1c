@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: '1일1장',
+      title: '하루한장',
       home: const SplashScreen(),
       theme: ThemeData(
         fontFamily: 'Noto Sans KR', // 커스텀 폰트 적용
@@ -52,7 +52,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return const Scaffold(
       body: Center(
         child: Text(
-          '말씀묵상',
+          '하루한장',
           style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
       ),

@@ -10,13 +10,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _currentIndex = 0;
+  int _currentIndex = 0; // 초기 인덱스를 0으로 설정 (비어있는 페이지 표시)
 
   final List<Widget> _pages = [
+    Container(), // 빈 페이지를 표시합니다.
     FirstPage(),
     SecondPage(),
     ThirdPage(),
-    FourthPage(),
   ];
 
   void onTabTapped(int index) {
@@ -35,19 +35,19 @@ class _HomePageState extends State<HomePage> {
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'First',
+            label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.mail),
-            label: 'Second',
+            icon: Icon(Icons.book),
+            label: '성경',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Third',
+            icon: Icon(Icons.music_note),
+            label: '찬송가',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Fourth',
+            icon: Icon(Icons.people),
+            label: '커뮤니티',
           ),
         ],
       ),
