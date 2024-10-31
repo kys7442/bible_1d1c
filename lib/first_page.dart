@@ -113,7 +113,7 @@ class BookGridView extends StatelessWidget {
               child: Center(
                 child: Text(
                   books[index],
-                  style: TextStyle(fontSize: 24),
+                  style: TextStyle(fontSize: 18),
                 ),
               ),
             ),

@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'first_sub2_page.dart';
 
-class FirstSubPage extends StatefulWidget {
+class FirstSub2Page extends StatefulWidget {
   final String bookName;
   final int bookId;
+  final int chapterId;
 
-  FirstSubPage({required this.bookName, required this.bookId});
+  FirstSub2Page({required this.bookName, required this.bookId, required this.chapterId});
 
   @override
-  _FirstSubPageState createState() => _FirstSubPageState();
+  _FirstSub2PageState createState() => _FirstSub2PageState();
 }
 
-class _FirstSubPageState extends State<FirstSubPage> {
+class _FirstSub2PageState extends State<FirstSub2Page> {
   List<Map<String, dynamic>> chapters = [];
   bool isLoading = true;
   String errorMessage = '';
@@ -26,7 +26,9 @@ class _FirstSubPageState extends State<FirstSubPage> {
 
   Future<void> fetchChapters() async {
     try {
-      final response = await http.get(Uri.parse('http://localhost:3000/bibles/chapterGrp/${widget.bookId}'));
+      // Update the URL to use the bookId and chapterId passed to the page
+      final response = await http.get(Uri.parse(
+          'http://localhost:3000/bibles/chapterBook/${widget.bookId}/${widget.chapterId}'));
       if (response.statusCode == 200) {
         final List<dynamic> data = json.decode(response.body);
         setState(() {
@@ -66,44 +68,36 @@ class _FirstSubPageState extends State<FirstSubPage> {
             Navigator.pop(context);
           },
         ),
-        title: Text('${widget.bookName}'),
+        title: Text('${widget.bookName} ${widget.chapterId}장'),
       ),
       body: isLoading
           ? Center(child: CircularProgressIndicator())
           : errorMessage.isNotEmpty
           ? Center(child: Text(errorMessage))
-          : GridView.builder(
-        padding: EdgeInsets.all(3.0),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisSpacing: 2,
-          mainAxisSpacing: 2,
-          crossAxisCount: 3,
-          childAspectRatio: 2 / 1,
-        ),
+          : ListView.builder(
+        padding: EdgeInsets.symmetric(vertical: 4.0), // Reduce vertical padding
         itemCount: chapters.length,
         itemBuilder: (context, index) {
-          final chapter = chapters[index];
-          return Card(
-            elevation: 2,
-            child: InkWell(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => FirstSub2Page(
-                      bookName: widget.bookName,
-                      bookId: widget.bookId,
-                      chapterId: int.parse(chapter['chapter']),
-                    ),
+          final chapter = chapters[index]['chapter'];
+          final page = chapters[index]['page'];
+          final contents = chapters[index]['contents'] ?? '내용 없음';
+
+          return Padding(
+            padding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 8.0), // Adjust spacing
+            child: Text.rich(
+              TextSpan(
+                children: [
+                  TextSpan(
+                    text: '$chapter장 $page절 ',
+                    style: TextStyle(fontWeight: FontWeight.bold),
                   ),
-                );
-              },
-              child: Center(
-                child: Text(
-                  '${chapter['chapter']}장',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
+                  TextSpan(
+                    text: contents,
+                    style: TextStyle(fontWeight: FontWeight.normal),
+                  ),
+                ],
               ),
+              style: TextStyle(fontSize: 15.0, height: 1.3), // Adjust font size and line height
             ),
           );
         },
