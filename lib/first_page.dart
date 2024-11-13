@@ -21,8 +21,8 @@ class _FirstPageState extends State<FirstPage> {
   }
 
   Future<void> fetchBibleBooks() async {
-    final response1 = await http.get(Uri.parse('http://localhost:3000/bibles/groupold'));
-    final response2 = await http.get(Uri.parse('http://localhost:3000/bibles/groupnew'));
+    final response1 = await http.get(Uri.parse('http://pamp.co.kr/bibles/groupold'));
+    final response2 = await http.get(Uri.parse('http://pamp.co.kr/bibles/groupnew'));
 
     if (response1.statusCode == 200) {
       final List<dynamic> data = json.decode(response1.body);

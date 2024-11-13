@@ -28,7 +28,7 @@ class _FirstSub2PageState extends State<FirstSub2Page> {
     try {
       // Update the URL to use the bookId and chapterId passed to the page
       final response = await http.get(Uri.parse(
-          'http://localhost:3000/bibles/chapterBook/${widget.bookId}/${widget.chapterId}'));
+          'http://pamp.co.kr/bibles/chapterBook/${widget.bookId}/${widget.chapterId}'));
       if (response.statusCode == 200) {
         final List<dynamic> data = json.decode(response.body);
         setState(() {

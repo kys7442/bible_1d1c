@@ -26,7 +26,7 @@ class _FirstSubPageState extends State<FirstSubPage> {
 
   Future<void> fetchChapters() async {
     try {
-      final response = await http.get(Uri.parse('http://localhost:3000/bibles/chapterGrp/${widget.bookId}'));
+      final response = await http.get(Uri.parse('http://pamp.co.kr/bibles/chapterGrp/${widget.bookId}'));
       if (response.statusCode == 200) {
         final List<dynamic> data = json.decode(response.body);
         setState(() {

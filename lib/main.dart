@@ -22,7 +22,8 @@ class MyApp extends StatelessWidget {
           selectedItemColor: Colors.black, // 선택된 아이템의 색상
           unselectedItemColor: Colors.grey[500], // 선택되지 않은 아이템의 색상
         ),
-      )
+      ),
+      debugShowCheckedModeBanner: false, // 디버그 배너 제거
     );
   }
 }
@@ -49,11 +50,10 @@ class _SplashScreenState extends State<SplashScreen> {
   // 'State.build' 메서드의 구현
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Center(
-        child: Text(
-          '하루한장',
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        child: Image.asset(
+          'assets/images/onechapteraday.png', // 폴더 내 이미지 경로
         ),
       ),
     );
